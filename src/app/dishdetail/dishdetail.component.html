@@ -9,9 +9,9 @@
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px"
      fxLayoutGap.xs="0">
-  <div fxFlex="40" *ngIf="dish">
+  <div fxFlex="40">
     <!--<p>Display the details of the Dish here</p>-->
-    <mat-card>
+    <mat-card *ngIf="dish">
       <mat-card-header>
         <mat-card-title>
           <h3>{{dish.name | uppercase}}</h3>
@@ -27,14 +27,16 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div fxflex="40" *ngIf="dish">
+  <div fxflex="40">
     <!--<p>Display the list of comments here</p>-->
-    <h3>Comments</h3>
-    <mat-list>     
+    <mat-list *ngIf="dish">
+      <h3>Comments</h3>
       <mat-list-item *ngFor="let comment of dish.comments">
         <p mat-line>{{comment.comment}}</p>
         <p mat-line>{{comment.rating}} Stars</p>
-        <p mat-line>-- {{comment.author}} {{comment.date | date:'MMM d, y'}}</p>
+        <p mat-line>
+          <span> -- {{comment.author}} {{comment.date | date}}</span>
+        </p>
       </mat-list-item>
     </mat-list>
   </div>
