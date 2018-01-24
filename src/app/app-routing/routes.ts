@@ -12,6 +12,10 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
+        path: 'aboutus',
+        component: AboutComponent
+    },
+    {
         path: 'menu',
         component: MenuComponent
     },
