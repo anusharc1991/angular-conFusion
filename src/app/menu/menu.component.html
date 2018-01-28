@@ -25,7 +25,7 @@
   </mat-list>-->
   <!--End List-->
 
-  <div fxFlex>
+  <div fxFlex *ngIf="dishes">
     <mat-grid-list cols="2" rowHeight="200px">
       <!--<mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)">-->
        <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
@@ -35,6 +35,9 @@
           </mat-grid-tile-footer>
        </mat-grid-tile>
     </mat-grid-list>
+  </div>
+  <div [hidden]="dishes">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 
   <!--Card View of a dish-->
