@@ -3,9 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\menu",
+    "\\src\\app\\contact",
     "\\src\\app\\shared"
   ],
-  "SelectedNode": "\\src\\styles.scss",
+  "SelectedNode": "\\src\\app\\shared\\feedback.ts",
   "PreviewInSolutionExplorer": false
 }
