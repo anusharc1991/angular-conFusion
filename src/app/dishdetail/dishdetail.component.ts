@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,7 +10,6 @@ import { Comment } from '../shared/comment';
 import 'rxjs/add/operator/switchMap';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VALID } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-dishdetail',
@@ -43,11 +42,13 @@ export class DishdetailComponent implements OnInit {
     constructor(private dishService: DishService,
         private route: ActivatedRoute,
         private location: Location,
-        private fb: FormBuilder) {
-            this.createForm();
-        }
+        private fb: FormBuilder,
+        @Inject('BaseURL') private BaseURL) { }
 
     ngOnInit() {
+
+        this.createForm();
+
         this.dishService.getDishIds()
         .subscribe(dishIds => this.dishIds = dishIds);
 
@@ -59,6 +60,8 @@ export class DishdetailComponent implements OnInit {
             this.setPrevNext(dish.id);
         });
     }
+
+    
 
     setPrevNext(dishId: number) {
         let index = this.dishIds.indexOf(dishId);
@@ -103,7 +106,7 @@ export class DishdetailComponent implements OnInit {
     }
 
     onSubmit() {
-        this.newComment['date'] = new Date().toDateString();
+        this.newComment['date'] = new Date().toISOString();
         console.log(this.newComment);
         this.dish.comments.push(this.newComment);
         this.commentForm.reset({
