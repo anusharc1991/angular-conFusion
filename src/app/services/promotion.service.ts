@@ -4,21 +4,24 @@ import { Promotion } from '../shared/promotion';
 import { PROMOTION } from '../shared/promotions';
 import { Observable } from 'rxjs/Observable';
 
+import { RestangularModule, Restangular } from 'ngx-restangular';
+
 @Injectable()
 export class PromotionService {
 
-    constructor() { }
+    constructor(private restangular: Restangular) { }
 
     getPromotions(): Observable<Promotion[]> {
-        return Observable.of(PROMOTION).delay(2000);
+        return this.restangular.all('promotions').getList();
     }
 
     getPromotion(id: number): Observable<Promotion> {
-        return Observable.of(PROMOTION.filter((promo) => (promo.id === id))[0]).delay(2000);
+        return this.restangular.one('promotions', id).get();
     }
 
     getFeaturedPromotion(): Observable<Promotion> {
-        return Observable.of(PROMOTION.filter((promo) => (promo.featured))[0]).delay(2000);
+        return this.restangular.all('promotions').getList({featured: true})
+        .map(promotions => promotions[0]);
     }
 
 }
